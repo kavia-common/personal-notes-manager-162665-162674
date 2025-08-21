@@ -1,82 +1,50 @@
-# Lightweight React Template for KAVIA
+# Personal Notes Frontend (React + Supabase)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, minimalistic, responsive notes app with a sidebar, top bar, and main editor area.
+Powered by React and Supabase.
+
+## Environment Variables
+
+Create a .env file in this folder (do not commit secrets) with:
+
+REACT_APP_SUPABASE_URL=your_supabase_project_url
+REACT_APP_SUPABASE_KEY=your_supabase_anon_key
+
+These are required for the app to connect to Supabase.
+
+## Local Development
+
+1. Install dependencies:
+   npm install
+
+2. Run:
+   npm start
+
+3. Open http://localhost:3000
+
+## Supabase Schema
+
+Create a table named notes with the following columns:
+
+- id: uuid (primary key, default value: gen_random_uuid() or uuid_generate_v4())
+- title: text
+- content: text
+- tags: text[] (or jsonb if you prefer; update service implementation accordingly)
+- created_at: timestamptz (default: now())
+- updated_at: timestamptz (default: now())
+
+Optionally add an updated_at trigger to auto-update timestamps.
+
+If using RLS, ensure policies allow read/write for anon role as appropriate.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Create, edit, delete notes
+- Search across title, content, and tags
+- Responsive layout: sidebar + main editor
+- Light theme with modern styling
 
-## Getting Started
+## Notes
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The UI handles missing env variables gracefully by showing an error banner when operations fail.
+- The app is designed without heavy UI frameworks, relying on modern CSS for performance.
